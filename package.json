@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Proyecto de Backend de RollingCoffee",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Capdevila Lucas",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
 }
