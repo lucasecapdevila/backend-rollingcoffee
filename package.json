@@ -1,0 +1,12 @@
+{
+  "name": "proyecto13-backend-cafeteria",
+  "version": "1.0.0",
+  "description": "Proyecto de Backend de RollingCoffee",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Capdevila Lucas",
+  "license": "ISC"
+}
