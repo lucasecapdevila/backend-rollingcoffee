@@ -4,15 +4,16 @@ import cors from 'cors'
 import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import productosRouter from './src/routes/productos.routes.js'
 
-//  1) Configurar un puerto
+//*  1) Configurar un puerto
 const app = express()   //  Generalmente se llama app, pero puede llevar cualquier nombre
 app.set('port', process.env.PORT || 4000)
 app.listen(app.get('port'), () => {
   console.log('Consoleado desde el puerto ' + app.get('port'));
 })
 
-//  2) Configurar los middlewares
+//*  2) Configurar los middlewares
 app.use(cors())    //  Permite obtener conexiones remotas
 app.use(morgan('dev'))   //  Nos da info extra en la terminal
 app.use(express.json())   //  Permite interpretar los datos en formato .json
@@ -26,11 +27,14 @@ const __dirname = path.dirname(__filename)
 
 app.use(express.static(path.join(__dirname,'/public')))
 
-//  3) Configurar las rutas
+//*  3) Configurar las rutas
 //  http://localhost:3000/productos   => la usabamos en json-server
 //  http://localhost:4001/   => la usamos en Postman
-app.get('/nuevo', (req, res) => {
-  //  Agregar lógica que debería hacer el Backend
-  console.log('Procesando la solicitud Get');
-  res.send('Respuesta del backend RollingCoffee')
-})
+app.use('/api', productosRouter)
+
+
+// app.get('/nuevo', (req, res) => {
+//   //  Agregar lógica que debería hacer el Backend
+//   console.log('Procesando la solicitud Get');
+//   res.send('Respuesta del backend RollingCoffee')
+// })
