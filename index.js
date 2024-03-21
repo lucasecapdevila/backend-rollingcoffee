@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import productosRouter from './src/routes/productos.routes.js'
+import usersRouter from './src/routes/users.routes.js'
 import './src/database/db.js'
 
 //*  1) Configurar un puerto
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname,'/public')))
 //  http://localhost:3000/productos   => la usabamos en json-server
 //  http://localhost:4001/   => la usamos en Postman
 app.use('/api', productosRouter)
+app.use('/api', usersRouter)
 
 
 // app.get('/nuevo', (req, res) => {
