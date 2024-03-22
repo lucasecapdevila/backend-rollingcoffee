@@ -37,15 +37,6 @@ export const crearProducto = async(req, res) => {
     //  Extraer los datos del body
     console.log(req);
     console.log(req.body);
-    //  Validar los datos del body:
-    const errors = validationResult(req)
-
-    //  Preguntar si hubieron errores
-    if(!errors.isEmpty()){
-      return res.status(400).json({
-        errores: errors.array()
-      })
-    }
 
     //  Pedir a la DB crear el producto
     const productoNuevo = new Producto(req.body)
