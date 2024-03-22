@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import Producto from "../database/models/producto.js";
 
 //  Traer el array de productos de la DB
@@ -36,10 +37,20 @@ export const crearProducto = async(req, res) => {
     //  Extraer los datos del body
     console.log(req);
     console.log(req.body);
-    //  todo: validar los datos del body
+    //  Validar los datos del body:
+    const errors = validationResult(req)
+
+    //  Preguntar si hubieron errores
+    if(!errors.isEmpty()){
+      return res.status(400).json({
+        errores: errors.array()
+      })
+    }
+
     //  Pedir a la DB crear el producto
     const productoNuevo = new Producto(req.body)
     await productoNuevo.save()
+
     //  Responder al frontend (éxito o error)
     res.status(201).json({
       mensaje: 'El producto fue creado exitosamente.'
