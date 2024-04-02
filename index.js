@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname,'/public')))
 //  http://localhost:3000/productos   => la usabamos en json-server
 //  http://localhost:4001/   => la usamos en Postman
 app.use('/api', productosRouter)
-app.use('/api', usersRouter)
+app.use('/api/usuario', usersRouter)
 
 
 // app.get('/nuevo', (req, res) => {

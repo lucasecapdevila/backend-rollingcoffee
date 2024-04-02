@@ -1,30 +1,33 @@
 import mongoose, {Schema} from "mongoose";
 
 const userSchema = new Schema({
-  userMail: {
+  userEmail: {
     type: String,
-    required: true,
-    minLength: 4,
-    maxLength: 250,
-    validator: (valor)=> {
-      const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
-      return pattern.test(valor)
+    require: true,
+    validate: {
+        validator: (value)=>{
+          const pattern = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i
+          return pattern.test(value)
+      }
     },
-    message: dato => `${dato.value} no es una dirección de correo electrónico válida.`,
     unique: true
   },
   userPassword: {
     type: String,
+    require: true
+  },
+  userRole: {
+    type: String,
+    require: true,
+  },
+  userName: {
+    type: String,
     required: true,
-    minLength: 8,
-    maxLength: 20,
-    validator: (valor)=> {
-      const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/
-      return pattern.test(valor)
-    },
-    message: 'La contraseña debe tener al menos una letra mayúscula, una letra minúscula y un número.'
-  }
-})
+    unique: true,
+    minLength: 4,
+    maxLength: 15
+  },
+});
 
 const User = mongoose.model('user', userSchema)
 
