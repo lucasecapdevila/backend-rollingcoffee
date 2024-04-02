@@ -32,7 +32,30 @@ export const crearUsuario = async(req, res) => {
 
 export const login = async (req, res) => {
   try {
-    
+    const {userMail, userPassword} = req.body
+    //  Verificar si el mail ya existe en la DB
+    const usuarioBuscado = await User.findOne({userMail})
+
+    //  Preguntar si el mail no existe
+    if(!usuarioBuscado){
+      return res.status(400).json({
+        mensaje: 'Correo o password incorrecto. Correo'
+      })
+    }
+
+    //  Verificar el password
+    const passwordValido = bcrypt.compareSync(userPassword, usuarioBuscado.userPassword)
+    if(!passwordValido){
+      return res.status(400).json({
+        mensaje: 'Correo o password incorrecto. Password'
+      })
+    }
+
+    res.status(200).json({
+      mensaje: 'El usuario existe',
+      userName: usuarioBuscado.userName,
+      userMail: usuarioBuscado.userMail
+    })
   } catch (error) {
     console.error(error);
     res.status(500).json({
