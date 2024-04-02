@@ -1,5 +1,6 @@
 import User from "../database/models/user.js";
 import bcrypt from 'bcrypt'
+import generarJWT from "../helpers/generarJWT.js";
 
 export const crearUsuario = async(req, res) => {
   try {
@@ -51,10 +52,14 @@ export const login = async (req, res) => {
       })
     }
 
+    //  Generar un token
+    const token = await generarJWT(usuarioBuscado.userName, usuarioBuscado.userMail)
+
     res.status(200).json({
       mensaje: 'El usuario existe',
       userName: usuarioBuscado.userName,
-      userMail: usuarioBuscado.userMail
+      userMail: usuarioBuscado.userMail,
+      token
     })
   } catch (error) {
     console.error(error);
