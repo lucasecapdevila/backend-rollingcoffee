@@ -1,7 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 
 const userSchema = new Schema({
-  userEmail: {
+  userMail: {
     type: String,
     require: true,
     validate: {
